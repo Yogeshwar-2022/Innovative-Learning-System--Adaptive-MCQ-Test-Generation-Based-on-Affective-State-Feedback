@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructions</title>
+    <link rel="stylesheet" href="{% static 'landing.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="instructions">
+            <h4>CAREFULLY FOLLOW THESE INSTRUCTIONS</h4>
+            <br>
+            <ul>
+                <li>
+                    <p> <img src={% static 'right-arrow.png' %}> You will be given {{question_count}} questions on the topic of APTITUDE</p>
+                </li>   
+                <li>
+                    <p> <img src={% static 'right-arrow.png' %}> There is NO TIME LIMIT for solving any question or the test</p>
+                </li>
+                <li>
+                    <p> <img src={% static 'right-arrow.png' %}> You cannot switch between questions, you can ANSWER ONLY ONCE</p>
+                </li>
+                <li>
+                    <p> <img src={% static 'right-arrow.png' %}> All questions are NOT COMPULSARY, if you don't answer any question you can't answer again</p>
+                </li>
+                <li>
+                    <p> <img src={% static 'right-arrow.png' %}> You MUST ASSIGN CONFIDENCE LEVEL for your answer to each question on scale of 1 to 10</p>
+                </li>
+            </ul>
+        </div>
+
+        <br><br>
+
+        <form method="post" action="{% url 'question_view' %}">
+            {% csrf_token %}
+            <input type="hidden" id="question_id" name="question_id" value="{{first_question_pk}}">
+            <button type="submit" id="styleStartPretest">Start Pretest</button>
+        </form>
+    </div>
+</body>

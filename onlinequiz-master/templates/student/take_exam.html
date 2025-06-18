@@ -1,0 +1,74 @@
+{% extends 'student/studentbase.html' %}
+{% block content %}
+{%load static%}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+</head>
+<br><br>
+<div class="container my-4">
+    <div class="jumbotron">
+
+	      <h3 class="text-info text-center">Before you start the Exam, here are the rules</h3>
+
+        <div class="row">
+
+            <div class="card border-info mx-4 my-4">
+                <div class="card-body text-info">
+
+                    <h4 class="card-title">Exam Details :</h4>
+                    <p class="card-text">
+                        </p><ul style="list-style:decimal;">
+                            <li>Exam Name : {{course.course_name}}</li>
+                            <li>Total Question : {{total_questions}}</li>
+                            <li>Total Marks : {{total_marks}}</li>
+                        </ul>
+                    <p></p>
+
+
+
+                    <h4 class="card-title">Rules :</h4>
+                    <p class="card-text">
+                        </p><ul style="list-style:decimal;">
+                            <li>All questions are multiple choice question.</li>
+                            <li><span class="text-danger">Only one choice is correct.</span></li>
+                            <li>Every question difficulty levels having :
+                            <ul class="">
+                                <li>Easy</li>
+                                <li>Medium</li>
+                                <li>Hard</li>
+                            </ul>
+                            </li>
+                
+                            <li>The three parameters are used to judge capability of user including : </li>
+                            <ul class="">
+                                <li>Time Spent on each question</li>
+                                <li>Number of time options are switched</li>
+                                <li>Answer Correctness</li>
+                            </ul>
+                            
+                            <li>
+                                Users are also expected to provide his/her confidence on question between 1 to 10.
+                            </li>
+
+                            <li>If you press refresh or go back to the previous page, there will be a new question for you and the question you were on will be counted as attempted.</li>
+                            <li>Questions are displayed randomly for every user.</li>
+                            <li>You will be told your performance statistics immediately when you submit the answer.</li>
+                        </ul>
+                    <p></p>
+                    {% comment %} <a href="{% url 'start-exam' course.id  %}" class="btn btn-info">Let's Start</a> {% endcomment %}
+                    <a href="http://127.0.0.1:9090/quiz/question/" class="btn btn-info">Let's Start</a>
+                </div>  
+                <div class="card-footer">Best Of Luck</div>  
+            </div>  
+        </div>  
+
+    </div>
+</div>
+
+<br><br><br><br><br><br>
+{% endblock content %}

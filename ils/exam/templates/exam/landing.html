@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructions</title>
+    <link rel="stylesheet" href="{% static 'landing.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="instructions">
+            <h4>CAREFULLY FOLLOW THESE INSTRUCTIONS</h4>
+            <br>
+            <ul>
+                <li>
+                    <p> <img src={% static 'right-arrow.png' %}> You will be given {{question_count}} questions on the topic of DSA</p>
+                </li>   
+                <li>
+                    <p> <img src={% static 'right-arrow.png' %}> There is NO TIME LIMIT for solving any question or the test</p>
+                </li>
+                <li>
+                    <p> <img src={% static 'right-arrow.png' %}> You cannot switch between questions, you can ANSWER ONLY ONCE</p>
+                </li>
+                <li>
+                    <p> <img src={% static 'right-arrow.png' %}> All questions are NOT COMPULSARY, if you don't answer any question you can't answer again</p>
+                </li>
+                <li>
+                    <p> <img src={% static 'right-arrow.png' %}> You must ASSIGN DIFFICULTY LEVEL to each question on scale of 1 to 10</p>
+                </li>
+            </ul>
+        </div>
+
+        <br><br>
+
+        <form method="post" action="{% url 'exam_submit_form' %}">
+            {% csrf_token %}
+            <input type="hidden" id="next_question_id" name="next_question_id" value="{{first_question_pk}}">
+            <input type="hidden" id="question_id" name="question_id" value="">
+            <input type="hidden" id="option_id" name="option_id" value="">
+            <button type="submit" id="styleStartPretest">Start Exam</button>
+        </form>
+    </div>
+</body>

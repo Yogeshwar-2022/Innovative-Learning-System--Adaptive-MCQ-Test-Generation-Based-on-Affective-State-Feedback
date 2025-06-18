@@ -1,0 +1,88 @@
+<!-- exam/templates/exam/question.html -->
+
+{% load static %}
+{% load mathfilters %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam</title>
+    <style>
+        .answered {
+            background-color: green !important;
+        }
+
+    </style>
+    <link rel="stylesheet" href="{% static 'exam/exam_question.css' %}">
+    <script src="{% static 'exam/exam_question.js' %}"></script>
+</head>
+<body>
+    <video id="video" width="200" height="200" autoplay></video>
+    <form id="questionForm" method="post" action="{% url 'exam_submit_form' %}">
+        {% csrf_token %}
+        <div class="questionFormText">
+            <h4>MCQ Single Option Correct</h4>
+            <p>Question {{question.pk}}</p> 
+            <p id="styleQuestionLabel">{{ question.label }}</p>
+        </div>
+        <div class="optionsDiv">
+            {% for option in question.options.all %}
+                <input type="radio" id="option{{ option.pk }}" name="selected_option" value="{{ option.pk }}" data-is-correct="{{ option.is_correct }}" 
+                    {% if option.is_current_selected %} checked {% endif %}>
+                <label for="option{{ option.pk }}">{{ option.text }}</label><br>
+            {% endfor %}
+        </div> 
+
+        <br>
+
+        <div class="buttonDiv">
+            <button type="button" id="clearOptionButton">Clear Option</button>
+            <button type="submit" id="styleSubmitAndNext">Next</button>
+        </div>
+
+        <input type="hidden" id="question_id" name="question_id" value="{{ question.pk }}">
+        <input type="hidden" id="is_correct" name="is_correct" value="">
+        <input type="hidden" id="time_spent" name="time_spent" value="">
+        <input type="hidden" id="times_option_changed" name="times_option_changed">
+        <input type="hidden" id="selected_option_id" name="selected_option_id" value="">
+        <input type="hidden" id="remaining_time" name="remaining_time" value="{{ remaining_time }}">
+    </form>
+
+    <br>
+
+    <div class="belowSection">
+        <div id="timer">Time spent: 0 seconds</div>
+        <div id="changeCount">You changed the option 0 time(s)</div> 
+        <div id="exam_timer">Time remaining: {{ remaining_time|intdiv:60 }}:{{remaining_time|mod:60}}</div>
+        <div class="belowSectionbuttons">
+            {% for Q in questions %}
+                <div class="belowSectionbutton">
+                    <button id="question{{ Q.pk }}" class="questionButton {% if Q.is_answered %} answered {% endif %}" data-question-id="{{ Q.pk }}">{{Q.pk}}</button>
+                </div>
+            {% endfor %}
+            <form method="post" action="{% url 'exam_submit_form' %}">
+                {% csrf_token %}
+            </form>
+        </div>
+        <br><br>
+        <button id="submit_exam" class="questionButton" data-question-id="submit_exam">Submit</button>
+    </div>
+
+    <script>
+        // Get the video element
+        const video = document.getElementById('video');
+
+        // Access the user's webcam
+        navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+            .then(stream => {
+                // Assign the webcam stream to the srcObject of the video element
+                video.srcObject = stream;
+            })
+            .catch(error => {
+                console.error('Error accessing media devices.', error);
+            });
+    </script>
+</body>
+</html>

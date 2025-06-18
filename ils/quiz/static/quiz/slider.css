@@ -1,0 +1,48 @@
+#confidence_rating {
+    width: 75%;
+    /* Full width of the slider */
+    height: 20px;
+    /* Height of the slider */
+    -webkit-appearance: none;
+    /* Remove default styling for WebKit browsers */
+    appearance: none;
+    /* Remove default styling */
+    background-color: #d3d3d3;
+    /* Background color of the slider track */
+    border-radius: 5px;
+    /* Rounded corners for the slider track */
+    outline: none;
+    /* Remove outline */
+    opacity: 0.7;
+    /* Set opacity for better visibility */
+    margin-top: 10px;
+    /* Adjust spacing as needed */
+}
+
+#confidence_rating::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    /* Remove default styling for WebKit browsers */
+    appearance: none;
+    /* Remove default styling */
+    width: 15px;
+    /* Width of the thumb */
+    height: 30px;
+    /* Height of the thumb */
+    background-color: #4CAF50;
+    /* Color of the thumb */
+    cursor: pointer;
+    /* Add pointer cursor */
+}
+
+#confidence_rating::-moz-range-thumb {
+    width: 20px;
+    /* Width of the thumb */
+    height: 20px;
+    /* Height of the thumb */
+    background-color: #4CAF50;
+    /* Color of the thumb */
+    border-radius: 50%;
+    /* Rounded shape for the thumb */
+    cursor: pointer;
+    /* Add pointer cursor */
+}
